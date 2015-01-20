@@ -28,6 +28,10 @@ public class DefaultReservationService implements ReservationService {
 
     @Override
     public MoviePlayReservation placeReservation(Long moviePlayId, String email, int seats) {
+        if(seats < 1) {
+            throw new ReservationException("You can't reserve less than 1 seat.");
+        }
+
         MoviePlay moviePlay = moviePlayRepository.findOne(moviePlayId);
         int seatsTaken = moviePlayReservationRepository.findByMoviePlay(moviePlay).stream()
                 .mapToInt(MoviePlayReservation::getSeatsTaken)

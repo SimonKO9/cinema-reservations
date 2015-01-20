@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Wybrany film</h2>
+        <h4>{{ movie.title }}</h4>
+        <p>{{ movie.description }}</p>
+    </div>
+    <div class="col-lg-12" ng-if="step == 'FORM'">
+        <h4>Rezerwacja</h4>
+        <div class="col-lg-2">Number of seats</div>
+        <div class="col-lg-2"><input required ng-model="reservation.seats" type="number"/></div>
+        <div class="col-lg-2">E-mail address</div>
+        <div class="col-lg-2"><input required ng-model="reservation.email" type="email"/></div>
+        <div class="col-lg-4"><button class="btn btn-primary" ng-click="doReservation()">Rezerwuj</button></div>
+        <div class="col-lg-12">
+            <p class="text-danger">{{ statusMsg }}</p>
+        </div>
+    </div>
+    <div class="col-lg-12" ng-if="step == 'CONFIRMATION'">
+        <h4>Potwierdzenie rezerwacji</h4>
+        <table class="col-lg-6 table-bordered table-hover">
+            <tr>
+                <td><b>Reservation number</b></td>
+                <td>{{ reservation.reservationNumber }}</td>
+            </tr>
+            <tr>
+                <td><b>Number of seats</b></td>
+                <td>{{ reservation.seatsTaken }}</td>
+            </tr>
+            <tr>
+                <td><b>E-mail</b></td>
+                <td>{{ reservation.email }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

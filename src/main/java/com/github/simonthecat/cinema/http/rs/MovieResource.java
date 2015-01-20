@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 @Controller
 public class MovieResource {
@@ -37,8 +40,10 @@ public class MovieResource {
 
     @RequestMapping("/api/movies")
     @ResponseBody
-    public List<Movie> getAll() {
-        return movieRepository.findAll();
+    public List<MovieDto> getAll() {
+        return movieRepository.findAll().stream()
+                .map(MovieDto::new)
+                .collect(toList());
     }
 
 }

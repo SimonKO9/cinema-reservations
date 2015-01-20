@@ -1,0 +1,13 @@
+<div class="row" ng-repeat="movie in movies">
+    <div class="col-lg-12">
+        <h4>{{ movie.title }}</h4>
+        <p>{{ movie.description }}</p>
+        <p ng-if="movie.plays.length == 0">
+            <i>Not playing today</i>
+        </p>
+        <p ng-if="movie.plays.length > 0">
+            Playing today:
+            <a class="btn btn-xs btn-primary" ng-repeat="play in movie.plays" ng-href="#/movies/{{movie.id}}/plays/{{play.id}}">{{ play.playDateObject | date:'shortTime' }}</a>
+        </p>
+    </div>
+</div>

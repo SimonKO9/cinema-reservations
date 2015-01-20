@@ -16,6 +16,7 @@ import com.github.simonthecat.cinema.http.dto.MoviePlayReservationDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.github.simonthecat.cinema.http.dto.MoviePlayReservationDto.fromMoviePlayReservation;
 import static java.util.stream.Collectors.toList;
@@ -51,6 +52,13 @@ public class MoviePlayResource {
                 .collect(toList());
     }
 
+    @RequestMapping(value = "/api/movies/{movieId}/plays/{moviePlayId}", method = RequestMethod.GET)
+    @ResponseBody
+    public MoviePlayDto getMoviePlay(@PathVariable("movieId") Long movieId, @PathVariable("moviePlayId") Long moviePlayId) {
+        MoviePlay play = moviePlayRepository.findOne(moviePlayId);
+        return MoviePlayDto.fromMoviePlay(play);
+    }
+
     @RequestMapping(value = "/api/movies/{movieId}/plays/{moviePlayId}/reservations", method = RequestMethod.GET)
     @ResponseBody
     public List<MoviePlayReservationDto> getReservations(@PathVariable("moviePlayId") Long moviePlayId) {
@@ -67,7 +75,6 @@ public class MoviePlayResource {
         String email = reservationCmd.getEmail();
         int seatsTaken = reservationCmd.getSeatsTaken();
         MoviePlayReservation reservation = reservationService.placeReservation(moviePlayId, email, seatsTaken);
-
         return fromMoviePlayReservation(reservation);
     }
 
