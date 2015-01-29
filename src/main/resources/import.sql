@@ -13,3 +13,9 @@ insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'B', '20
 insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'C', '2015-01-20 22:00:00');
 
 insert into movieplayreservations (reservation_number, movie_play_id, seats_taken, email) values('RESERV123', 1, 6, 'ktosiek@gmail.com');
+
+create table IF NOT EXISTS users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
+create table IF NOT EXISTS authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
+
+insert into users(username, password, enabled) values ('admin', '$2a$10$x74Qtjoj1rgDzYxbIUokyeoqBxxpyMuhuyDWCaer2cq5cNwF2ufEa', true);
+insert into authorities(username, authority) values('admin', 'ROLE_ADMIN');
