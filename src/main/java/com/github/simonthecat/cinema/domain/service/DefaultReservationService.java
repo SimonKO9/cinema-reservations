@@ -5,6 +5,7 @@ import com.github.simonthecat.cinema.domain.MoviePlayReservation;
 import com.github.simonthecat.cinema.domain.MoviePlayReservationBuilder;
 import com.github.simonthecat.cinema.domain.persistence.MoviePlayRepository;
 import com.github.simonthecat.cinema.domain.persistence.MoviePlayReservationRepository;
+import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
@@ -33,7 +34,7 @@ public class DefaultReservationService implements ReservationService {
             throw new ReservationException("You can't reserve less than 1 seat.");
         }
 
-        if(StringUtils.isEmpty(email)) {
+        if(StringUtils.isEmpty(email) || !new EmailValidator().isValid(email, null)) {
             throw new ReservationException("Invalid e-mail address.");
         }
 
