@@ -8,9 +8,9 @@ insert into cinemahalls (`key`, `seats`) values('C', 60);
 insert into cinemahalls (`key`, `seats`) values('D', 10);
 insert into cinemahalls (`key`, `seats`) values('E', 10);
 
-insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'A', '2015-01-19 21:00:00');
-insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'B', '2015-01-19 22:00:00');
-insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'C', '2015-01-20 22:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'A', CURRENT_DATE() || ' 21:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'B', CURRENT_DATE() || ' 22:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'C', CURRENT_DATE() || ' 23:00:00');
 
 insert into movieplayreservations (reservation_number, movie_play_id, seats_taken, email) values('RESERV123', 1, 6, 'ktosiek@gmail.com');
 

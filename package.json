@@ -1,0 +1,7 @@
+{
+  "name": "cinema-reservations",
+  "version": "0.0.1",
+  "devDependencies": {
+    "bower": "1.2.6"
+  }
+}

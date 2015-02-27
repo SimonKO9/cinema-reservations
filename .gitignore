@@ -36,3 +36,4 @@ README.html
 /src/main/webapp/bower_components/*
 /db
 /db/*
+/node_modules

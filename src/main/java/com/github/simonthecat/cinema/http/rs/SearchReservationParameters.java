@@ -4,14 +4,24 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class MoviePlayReservationParameters {
+public class SearchReservationParameters {
 
     private String movieTitle;
     private String hallKey;
     private String dateFrom;
     private String dateTo;
+    private String reservationId;
+    private String email;
 
-    public MoviePlayReservationParameters() {
+    public SearchReservationParameters() {
+    }
+
+    public String getReservationId() {
+        return reservationId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getMovieTitle() {
