@@ -1,0 +1,26 @@
+<section id="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-wrap" ng-form="loginForm">
+                    <h1>Log in with your username</h1>
+
+                    <div class="form-group">
+                        <label for="username" class="sr-only">Email</label>
+                        <input type="text" required="required" name="username" id="username" class="form-control" placeholder="admin" ng-model="model.username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" required="required" name="password" id="password" class="form-control" placeholder="password" ng-model="model.password">
+                    </div>
+
+                    <button id="btn-login" class="btn btn-custom btn-lg btn-block" ng-click="signIn(model.username, model.password)"
+                            ng-disabled="loginForm.$invalid || loginForm.$pristine">Log in</button>
+                </div>
+            </div>
+            <!-- /.col-xs-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>

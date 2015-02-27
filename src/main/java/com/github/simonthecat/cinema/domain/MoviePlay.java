@@ -1,5 +1,7 @@
 package com.github.simonthecat.cinema.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.simonthecat.cinema.util.LocalDateTimeJsonSerializer;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -21,6 +23,7 @@ public class MoviePlay {
 
     @Type(type = "com.github.simonthecat.cinema.util.LocalDateTimeUserType")
     @Column
+    @JsonSerialize(using = LocalDateTimeJsonSerializer.class)
     private LocalDateTime playDate;
 
     public Long getId() {

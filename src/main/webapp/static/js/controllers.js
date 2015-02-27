@@ -1,4 +1,7 @@
-angular.module('cinemaControllers', [])
+angular.module('cinemaControllers', ['angular-loading-bar'])
+    .config(function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = true;
+    })
     .controller('MovieListCtrl', function ($scope, $http) {
         $scope.movies = [];
 
@@ -40,7 +43,7 @@ angular.module('cinemaControllers', [])
             };
         })();
 
-        $scope.doReservation = function() {
+        $scope.doReservation = function () {
             $scope.statusMsg = '';
             var reservation = {
                 seatsTaken: $scope.reservation.seats,
@@ -69,5 +72,66 @@ angular.module('cinemaControllers', [])
                 loadMoviePlay();
             });
 
-    });
+    })
+
+    .controller('LoginController', function ($scope, $http, $location) {
+
+        $scope.model = {username: '', password: ''};
+        $scope.errorMsg = '';
+
+        $scope.signIn = function (username, password) {
+            var token = btoa(username + ":" + password);
+
+            $http.defaults.headers.common.Authorization = 'Basic ' + token;
+
+            $http({
+                method: 'GET',
+                url: 'api/users/' + username
+            })
+                .success(function (data) {
+                    sessionStorage.setItem('userData', JSON.stringify(data));
+                    sessionStorage.setItem('userToken', token);
+                    $location.path('/reservations')
+                })
+                .error(function (data, status, headers) {
+                    if (status / 100 == 4) {
+                        $scope.errorMsg = 'Invalid credentials or insufficient privileges.';
+                    } else {
+                        $scope.errorMsg = 'There was an error, please try again later.';
+                    }
+                });
+        }
+
+    })
+
+    .controller('ListReservationsController', function ($scope, $http, $filter, User, cfpLoadingBar) {
+        $scope.searchModel = {
+            movieTitle: '',
+            hallKey: '',
+            dateFrom: $filter('date')(new Date() - 3600 * 24 * 1000, 'yyyy-MM-dd'),
+            dateTo: $filter('date')(new Date(), 'yyyy-MM-dd'),
+            reservationId: '',
+            email: ''
+        };
+
+        $scope.userData = User;
+        $scope.searchResults = [];
+
+        $scope.search = function () {
+            cfpLoadingBar.start();
+            $http
+                .get('/api/reservations', {
+                    params: angular.copy($scope.searchModel)
+                })
+                .success(function (data) {
+                    $scope.searchResults = data;
+                    cfpLoadingBar.complete();
+                })
+                .error(function (data) {
+                    $scope.searchResults = [];
+                    cfpLoadingBar.complete();
+                });
+        }
+    })
+;
 

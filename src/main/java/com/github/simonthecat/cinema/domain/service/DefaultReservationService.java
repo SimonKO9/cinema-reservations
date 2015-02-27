@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 
@@ -30,6 +31,10 @@ public class DefaultReservationService implements ReservationService {
     public MoviePlayReservation placeReservation(Long moviePlayId, String email, int seats) {
         if(seats < 1) {
             throw new ReservationException("You can't reserve less than 1 seat.");
+        }
+
+        if(StringUtils.isEmpty(email)) {
+            throw new ReservationException("Invalid e-mail address.");
         }
 
         MoviePlay moviePlay = moviePlayRepository.findOne(moviePlayId);

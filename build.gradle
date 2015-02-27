@@ -12,6 +12,7 @@ defaultTasks 'bower'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'war'
 apply plugin: 'spring-boot'
 
 jar {
@@ -33,6 +34,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security:1.2.1.RELEASE')
     compile("com.h2database:h2")
     testCompile("junit:junit")
+}
+
+jar.into('static') {
+    from('src/main/webapp')
 }
 
 // Get the path for the locally installed binaries
