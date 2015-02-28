@@ -11,8 +11,12 @@ insert into cinemahalls (`key`, `seats`) values('E', 10);
 insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'A', CURRENT_DATE() || ' 21:00:00');
 insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'B', CURRENT_DATE() || ' 22:00:00');
 insert into movieplays (movie_id, cinema_hall_key, play_date) values(1, 'C', CURRENT_DATE() || ' 23:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(2, 'A', CURRENT_DATE() || ' 15:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(2, 'B', CURRENT_DATE() || ' 18:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(3, 'D', CURRENT_DATE() || ' 14:00:00');
+insert into movieplays (movie_id, cinema_hall_key, play_date) values(3, 'E', CURRENT_DATE() || ' 18:00:00');
 
-insert into movieplayreservations (reservation_number, movie_play_id, seats_taken, email) values('RESERV123', 1, 6, 'ktosiek@gmail.com');
+insert into movieplayreservations (reservation_number, movie_play_id, seats_taken, email) values('RESERV123', 1, 6, 'nonexistent@example.org');
 
 create table IF NOT EXISTS users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
 create table IF NOT EXISTS authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
