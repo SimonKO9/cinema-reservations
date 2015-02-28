@@ -118,10 +118,18 @@ angular.module('cinemaControllers', ['angular-loading-bar'])
         $scope.searchResults = [];
 
         $scope.search = function () {
+            var searchParameters = angular.copy($scope.searchModel);
+            if(searchParameters.dateFrom) {
+                searchParameters.dateFrom = new Date(searchParameters.dateFrom).getTime();
+            }
+            if(searchParameters.dateTo) {
+                searchParameters.dateTo = new Date(searchParameters.dateTo).getTime();
+            }
+            
             cfpLoadingBar.start();
             $http
                 .get('/api/reservations', {
-                    params: angular.copy($scope.searchModel)
+                    params: searchParameters
                 })
                 .success(function (data) {
                     $scope.searchResults = data;

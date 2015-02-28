@@ -8,8 +8,8 @@ public class SearchReservationParameters {
 
     private String movieTitle;
     private String hallKey;
-    private String dateFrom;
-    private String dateTo;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
     private String reservationId;
     private String email;
 
@@ -41,19 +41,25 @@ public class SearchReservationParameters {
     }
 
     public LocalDateTime getDateFrom() {
-        return tryToDate(dateFrom);
+        return dateFrom;
     }
 
     public void setDateFrom(String dateFrom) {
-        this.dateFrom = dateFrom;
+        LocalDateTime dateTime = tryToDate(dateFrom);
+        if(dateTime != null) {
+            this.dateFrom = dateTime.withHour(0).withMinute(0).withSecond(0);
+        }
     }
 
     public LocalDateTime getDateTo() {
-        return tryToDate(dateTo);
+        return dateTo;
     }
 
     public void setDateTo(String dateTo) {
-        this.dateTo = dateTo;
+        LocalDateTime dateTime = tryToDate(dateTo);
+        if(dateTime != null) {
+            this.dateTo = dateTime.withHour(23).withMinute(59).withSecond(59);
+        }
     }
 
     private LocalDateTime tryToDate(String millisStr) {
@@ -61,7 +67,7 @@ public class SearchReservationParameters {
             Long millis = Long.valueOf(millisStr);
             LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(millis), ZoneId.of("UTC"));
             return dateTime;
-        } catch(NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             return null;
         }
     }
@@ -72,5 +78,17 @@ public class SearchReservationParameters {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchReservationParameters{" +
+                "movieTitle='" + movieTitle + '\'' +
+                ", hallKey='" + hallKey + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", reservationId='" + reservationId + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
