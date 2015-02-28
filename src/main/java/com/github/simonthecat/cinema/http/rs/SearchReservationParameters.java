@@ -66,4 +66,11 @@ public class SearchReservationParameters {
         }
     }
 
+    public void setReservationId(String reservationId) {
+        this.reservationId = reservationId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
