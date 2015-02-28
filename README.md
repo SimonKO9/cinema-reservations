@@ -1,11 +1,18 @@
 Cinema Reservations application
 ===============================
 
+Requirements
+------------
+
+NPM is required to be installed. 
+
+Gradle >= 2.1 is recommended, but not necessary (wrapper is bundled with application).
+If gradle is not available please use `gradlew` or `gradlew.bat` (corresponding to OS) instead of gradle.
+
+Java JDK8 is required for compiling, Java JRE8 is required for running.
+
 Installing javascript-resources
 -------------------------------
-
-NPM is required to be installed. Gradle >= 2.1 is recommended, but not necessary (wrapper is bundled with application).
-If gradle is not available please use `gradlew` or `gradlew.bat` (corresponding to OS) instead of gradle.
 
 Install JS-libraries: `gradle bower`
 
